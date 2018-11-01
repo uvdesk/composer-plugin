@@ -22,6 +22,9 @@
         }
     },
     "extra": {
-        "class": "Webkul\\UVDesk\\PackageManager\\Manager"
+        "class": "Webkul\\UVDesk\\PackageManager\\Manager",
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
     }
 }
