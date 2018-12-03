@@ -9,5 +9,5 @@
 
 [1]: https://www.uvdesk.com/
 [2]: https://getcomposer.org/
-[3]: https://github.com/akshaywebkul/community
+[3]: https://github.com/uvdesk/community-skeleton
 [4]: https://symfony.com/
