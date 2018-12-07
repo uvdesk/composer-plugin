@@ -103,7 +103,7 @@ final class ComposerPackage
             $resourceSourcePath = "$installationPath/$source";
             $resourceDestinationPath = "$projectDirectory/$destination";
 
-            if (file_exists($resourceSourcePath) && !file_exists($resourceDestinationPath)) {
+            if (file_exists($resourceSourcePath)) {
                 // Create directory if it doesn't exist
                 $destinationDirectory = substr($resourceDestinationPath, 0, strrpos($resourceDestinationPath, '/'));
                 $missingDirectoryTreePath = substr($destinationDirectory, strlen(getcwd()));
