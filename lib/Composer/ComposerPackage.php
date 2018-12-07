@@ -67,7 +67,7 @@ final class ComposerPackage
                 return $array;
             }
 
-            return array_unique($array, SORT_REGULAR);
+            return $this->isArrayAssociative($array) ? array_filter(array_unique($array, SORT_REGULAR)) : array_values(array_filter(array_unique($array, SORT_REGULAR)));
         }
 
         return $array;
