@@ -1,5 +1,5 @@
 {
-    "name": "uvdesk/composer-package-manager",
+    "name": "uvdesk/composer-plugin",
     "type": "composer-plugin",
     "description": "Generic purpose composer plugin to auto-configure your packages",
     "license": "MIT",
