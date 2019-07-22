@@ -3,7 +3,6 @@
 namespace Webkul\UVDesk\PackageManager\Composer;
 
 use Symfony\Component\Yaml\Yaml;
-use Webkul\UVDesk\PackageManager\Extensions;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 final class ComposerPackage
@@ -12,11 +11,6 @@ final class ComposerPackage
     private $consoleText;
     private $movableResources = [];
     private $combineResources = [];
-
-    public function __construct(Extensions\ExtensionInterface $extension = null)
-    {
-        $this->extension = $extension;
-    }
 
     private function isArrayAssociative(array $array)
     {
@@ -135,30 +129,6 @@ final class ComposerPackage
                     
                     file_put_contents("$projectDirectory/$sourcePath", Yaml::dump($config, 6));
                 }
-            }
-        }
-
-        // Register package as an extension
-        if (!empty($this->extension)) {
-            switch (true) {
-                case $this->extension instanceof Extensions\HelpdeskExtension:
-                    $extensionClassPath = get_class($this->extension);
-                    $pathRegisteredExtensions = "$projectDirectory/config/extensions.php";
-
-                    $registeredExtensions = file_exists($pathRegisteredExtensions) ? require $pathRegisteredExtensions : [];
-
-                    if (!in_array($extensionClassPath, $registeredExtensions)) {
-                        array_push($registeredExtensions, $extensionClassPath);
-                    }
-
-                    $registeredExtensions = array_map(function($classPath) {
-                        return "\t$classPath::class,\n";
-                    }, $registeredExtensions);
-
-                    file_put_contents($pathRegisteredExtensions, str_replace("{REGISTERED_EXTENSIONS}", implode("", $registeredExtensions), Extensions\HelpdeskExtension::CONFIG_TEMPLATE));
-                    break;
-                default:
-                    break;
             }
         }
 
