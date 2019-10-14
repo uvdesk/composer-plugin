@@ -23,6 +23,5 @@
     },
     "extra": {
         "class": "Webkul\\UVDesk\\PackageManager\\Manager"
-    },
-    "prefer-stable": true
+    }
 }
