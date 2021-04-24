@@ -3,6 +3,10 @@ CHANGELOG for 1.0.x
 
 This changelog references any relevant changes introduced in 1.0 minor versions.
 
+* 1.0.3 (Released on 2021-04-24)
+    * **Misc. Bug Fixes:**
+        * Implement two abstruct methods for the plugin interface.
+
 * 1.0.2 (Released on 2021-04-21)
     * **Misc. Bug Fixes:**
         * Composer plugin api and composer version updated for latest version.
