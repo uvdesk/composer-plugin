@@ -34,6 +34,18 @@ class Manager implements PluginInterface, EventSubscriberInterface
         $this->composer = $composer;
     }
 
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+        $this->io = $io;
+        $this->composer = $composer;
+    }
+
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+        $this->io = $io;
+        $this->composer = $composer;
+    }
+
     public function logPackageEvent(PackageEvent $event)
     {
         $this->packagesOperation[] = $event->getOperation();
