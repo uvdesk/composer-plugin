@@ -3,6 +3,10 @@ CHANGELOG for 1.0.x
 
 This changelog references any relevant changes introduced in 1.0 minor versions.
 
+* 1.0.4 (Released on 2021-10-27)
+    * **Misc. Updates:**
+        * Compatibility with PHP 8.
+
 * 1.0.3 (Released on 2021-04-24)
     * **Misc. Bug Fixes:**
         * Implement two abstruct methods for the plugin interface.
