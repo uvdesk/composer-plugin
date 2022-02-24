@@ -14,6 +14,8 @@ use Composer\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Composer\DependencyResolver\Operation\UpdateOperation;
 use Webkul\UVDesk\PackageManager\Composer\ComposerPackageExtension;
+use Webkul\UVDesk\PackageManager\Event\ComposerPackageUpdatedEvent;
+use Webkul\UVDesk\PackageManager\Event\ComposerProjectCreatedEvent;
 
 class Manager implements PluginInterface, EventSubscriberInterface
 {
@@ -73,7 +75,7 @@ class Manager implements PluginInterface, EventSubscriberInterface
         foreach ($packageOperations as $packageOperation) {
             $package = $packageOperation instanceof UpdateOperation ? $packageOperation->getTargetPackage() : $packageOperation->getPackage();
             $extras = $package->getExtra();
-            
+
             if (!empty($extras['uvdesk-package-extension']) && class_exists($extras['uvdesk-package-extension'])) {
                 try {
                     $pathToPackage = $this->composer->getInstallationManager()->getInstallPath($package);
@@ -108,7 +110,9 @@ class Manager implements PluginInterface, EventSubscriberInterface
                 $dispatcher->addListener('uvdesk.composer.package.updated', [$packageHandler, 'handleComposerPackageUpdateEvent']);
             }
 
-            $dispatcher->dispatch('uvdesk.composer.package.updated');
+            $composerEvent = new ComposerPackageUpdatedEvent($event);
+            $dispatcher->dispatch($composerEvent, ComposerPackageUpdatedEvent::NAME);
+
             $this->io->writeError("");
         }
     }
@@ -124,7 +128,8 @@ class Manager implements PluginInterface, EventSubscriberInterface
                 $dispatcher->addListener('uvdesk.composer.project.created', [$packageHandler, 'handleComposerProjectCreateEvent']);
             }
 
-            $dispatcher->dispatch('uvdesk.composer.project.created');
+            $composerEvent = new ComposerProjectCreatedEvent($event);
+            $dispatcher->dispatch($composerEvent, ComposerProjectCreatedEvent::NAME);
         }
     }
     
@@ -134,8 +139,8 @@ class Manager implements PluginInterface, EventSubscriberInterface
             PackageEvents::POST_PACKAGE_INSTALL => 'logPackageEvent',
             PackageEvents::POST_PACKAGE_UPDATE => 'logPackageEvent',
             PackageEvents::POST_PACKAGE_UNINSTALL => 'logPackageEvent',
-            ScriptEvents::POST_INSTALL_CMD => 'postPackagesInstallEvent',
-            ScriptEvents::POST_UPDATE_CMD => 'postPackagesUpdateEvent',
+            ScriptEvents::POST_INSTALL_CMD => ['postPackagesInstallEvent', \PHP_INT_MAX],
+            ScriptEvents::POST_UPDATE_CMD => ['postPackagesUpdateEvent', \PHP_INT_MAX],
             ScriptEvents::POST_CREATE_PROJECT_CMD => 'postProjectCreationEvent',
         ];
     }

@@ -4,7 +4,7 @@ namespace Webkul\UVDesk\PackageManager\Composer;
 
 use Symfony\Component\Yaml\Yaml;
 use Composer\Package\PackageInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Composer\DependencyResolver\Operation\UpdateOperation;
 use Composer\DependencyResolver\Operation\UninstallOperation;
