@@ -1,7 +1,7 @@
 {
     "name": "uvdesk/composer-plugin",
-    "type": "composer-plugin",
     "description": "Generic purpose composer plugin to auto-configure your packages",
+    "type": "composer-plugin",
     "license": "MIT",
     "authors": [
         {
@@ -22,7 +22,10 @@
         }
     },
     "extra": {
-        "class": "Webkul\\UVDesk\\PackageManager\\Manager"
+        "class": "Webkul\\UVDesk\\PackageManager\\Manager",
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
     },
     "minimum-stability": "stable"
 }
